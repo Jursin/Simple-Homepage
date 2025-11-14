@@ -1,20 +1,16 @@
 {
   "todoList": [
     {
-      "text": "学会Java",
+      "text": "学会 Python",
       "checked": false
     },
     {
-      "text": "学会粤语",
+      "text": "学会 C/C++",
       "checked": false
     },
     {
-      "text": "学会英语",
+      "text": "通过英语四六级",
       "checked": false
-    },
-    {
-      "text": "重构个人主页",
-      "checked": true
     }
   ]
 }

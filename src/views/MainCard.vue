@@ -33,7 +33,7 @@
       <div class="leftBox">
         <!-- todo -->
         <div class="card">
-          <span class="cardHeader">我的一些鸽子计划📃</span>
+          <span class="cardHeader"><Icon icon="fluent-color:apps-list-20" /> 待办</span>
           <div class="cardMain">
             <div class="todoList">
               <div
@@ -60,9 +60,9 @@
         <!-- 时间显示 -->
         <div class="card">
           <div class="time-progress">
-            <h3>时光⌛</h3>
+            <h3><Icon icon="noto:hourglass-not-done" /> 时光</h3>
             <div class="progress-item">
-              <p>☀️今天已经过去了 {{ hoursPassed }} / 24 小时</p>
+              <p>☀️ 今天已经过去了 {{ hoursPassed }} / 24 小时</p>
               <div class="progress-bar">
                 <div
                   class="progress-fill"
@@ -72,7 +72,7 @@
             </div>
 
             <div class="progress-item">
-              <p>📆本周已经过去了 {{ daysInWeekPassed }} / 7 天</p>
+              <p>📆 本周已经过去了 {{ daysInWeekPassed }} / 7 天</p>
               <div class="progress-bar">
                 <div
                   class="progress-fill"
@@ -83,7 +83,7 @@
 
             <div class="progress-item">
               <p>
-                🌙本月已经过去了 {{ daysInMonthPassed }} /
+                🌙 本月已经过去了 {{ daysInMonthPassed }} /
                 {{ daysInCurrentMonth }} 天
               </p>
               <div class="progress-bar">
@@ -96,7 +96,7 @@
 
             <div class="progress-item">
               <p>
-                ⭐今年已经过去了 {{ daysInYearPassed }} /
+                ⭐ 今年已经过去了 {{ daysInYearPassed }} /
                 {{ daysInCurrentYear }} 天
               </p>
               <div class="progress-bar">
@@ -112,7 +112,7 @@
 
       <div class="rightBox">
         <div class="card">
-          <p>你好鸭，很高兴认识你👋</p>
+          <p>你好呀，很高兴认识你👋</p>
           <p>
             我叫
             <b>{{ config.name }}</b>

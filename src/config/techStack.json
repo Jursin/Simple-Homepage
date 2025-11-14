@@ -1,48 +1,28 @@
 {
   "techStack": [
     {
-      "icon": "vscode-icons:file-type-html",
-      "name": "HTML"
-    },
-    {
-      "icon": "devicon:css3",
-      "name": "CSS"
-    },
-    {
-      "icon": "vscode-icons:file-type-light-js",
-      "name": "JavaScript"
-    },
-    {
-      "icon": "catppuccin:markdown-mdx",
+      "icon": "material-icon-theme:markdown",
       "name": "Markdown"
     },
     {
-      "icon": "logos:mysql",
-      "name": "MySql"
+      "icon": "material-icon-theme:html",
+      "name": "HTML"
     },
     {
-      "icon": "logos:php",
-      "name": "PHP"
-    },
-    {
-      "icon": "material-icon-theme:python",
-      "name": "Python"
+      "icon": "material-icon-theme:css",
+      "name": "CSS"
     },
     {
       "icon": "material-icon-theme:vue",
       "name": "Vue"
     },
     {
-      "icon": "skill-icons:jquery",
-      "name": "Jquery"
+      "icon": "material-icon-theme:python",
+      "name": "Python"
     },
     {
-      "icon": "skill-icons:photoshop",
-      "name": "PhotoShop"
-    },
-    {
-      "icon": "devicon:xd",
-      "name": "XD"
+      "icon": "logos:mysql",
+      "name": "MySql"
     }
   ]
 }

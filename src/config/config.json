@@ -1,13 +1,13 @@
 {
-  "name": "鹊楠",
-  "age": "06",
-  "zodiac": "天蝎座♏",
-  "avatarUrl": "https://i.p-i.vip/43/20240913-66e403f2331ec.webp",
+  "name": "Jursin",
+  "age": "07",
+  "zodiac": "巨蟹座",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/127487914?v=4",
   "emjoi": "😋",
   "infoTags": {
     "sex": "男",
-    "school": "惠州城市职业学校",
-    "province": "广东省"
+    "school": "长江大学",
+    "province": "湖北省"
   },
-  "professions": ["学生", "前端入门者", "后端初学者"]
+  "professions": ["学生", "前端入门者"]
 }

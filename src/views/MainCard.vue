@@ -31,34 +31,22 @@
 
     <div class="content">
       <div class="leftBox">
-        <!-- todo -->
-        <div class="card">
-          <span class="cardHeader"><Icon icon="fluent-color:apps-list-20" /> 待办</span>
-          <div class="cardMain">
-            <div class="todoList">
-              <div
-                class="todoItem"
-                v-for="(i, index) in todo.todoList"
-                :key="index"
-              >
-                <Icon
-                  :icon="i.checked ? 'lets-icons:check-ring' : 'gg:radio-check'"
-                  width="24"
-                  height="24"
-                />
-                <span v-if="i.checked">
-                  <del>{{ i.text }}</del>
-                </span>
-                <span v-else>
-                  {{ i.text }}
-                </span>
+          <!-- 打字机卡片 -->
+          <div class="typew card">
+            <h3 style="margin: 0 0 5px 0;"><Icon icon="fluent-color:chat-48" /> 一言</h3>
+            <div class="quote-top">
+              <Icon icon="carbon:quotes" width="16" height="16" />
+            </div>
+            <div class="quote-content">
+                <Typewriter :text="hitokoto" @typingComplete="handleTypingComplete" />
               </div>
+            <div class="quote-bottom">
+              <Icon icon="ph:quotes-fill" width="16" height="16" />
             </div>
           </div>
-        </div>
 
         <!-- 时间显示 -->
-        <div class="card">
+        <div class="card" style="padding: 25px 16px;" >
           <div class="time-progress">
             <h3><Icon icon="noto:hourglass-not-done" /> 时光</h3>
             <div class="progress-item">
@@ -135,15 +123,39 @@
               class="techItem"
               :data-name="i.name"
             >
-              <Icon :icon="i.icon" width="40" height="40" />
+              <template v-if="i.custom">
+                <!-- 自定义SVG图标 -->
+                <svg width="40" height="40" viewBox="0 0 24 24" :fill="i.fill || 'currentColor'">
+                  <path :d="i.svg" :fill="i.fill || 'currentColor'"/>
+                </svg>
+              </template>
+              <template v-else>
+                <!-- 普通图标 -->
+                <Icon :icon="i.icon" width="40" height="40" />
+              </template>
             </div>
           </div>
-        </div>
-
-        <div class="typew card">
-          <Icon icon="carbon:quotes" width="16" height="16" />
-          <Typewriter :text="typewriter" />
-          <Icon icon="ph:quotes-fill" width="16" height="16" />
+          
+          <h3>我使用的编程工具🛠️</h3>
+          <div class="techStack">
+            <div
+              v-for="(i, index) in techStack.devTools"
+              :key="index"
+              class="techItem"
+              :data-name="i.name"
+            >
+              <template v-if="i.custom">
+                <!-- 自定义SVG图标 -->
+                <svg width="40" height="40" viewBox="0 0 24 24" :fill="i.fill || 'currentColor'">
+                  <path :d="i.svg" :fill="i.fill || 'currentColor'"/>
+                </svg>
+              </template>
+              <template v-else>
+                <!-- 普通图标 -->
+                <Icon :icon="i.icon" width="40" height="40" />
+              </template>
+            </div>
+          </div>
         </div>
 
         <!-- 外链按钮 -->
@@ -172,14 +184,38 @@
 import config from "../config/config.json";
 import linkBtns from "../config/linkBtn.json";
 import techStack from "../config/techStack.json";
-import todo from "../config/todo.json";
-import typewriter from "../config/typewriter.json";
 import { Icon } from "@iconify/vue";
 import LinkBtn from "../components/LinkBtn.vue";
 import { onMounted, ref, computed } from "vue";
 import Typewriter from "../components/Typewriter.vue";
 
 const now = ref(new Date());
+const hitokoto = ref("加载中...");
+const nextHitokoto = ref(null); // 存储下一条要显示的内容
+
+// 获取一言数据
+const fetchHitokoto = async () => {
+  try {
+    const response = await fetch('https://international.v1.hitokoto.cn/?c=d&c=h&c=i');
+    const data = await response.json();
+    // 将新内容存入中间变量，而不是直接更新显示
+    nextHitokoto.value = data.hitokoto || "智慧需要沉淀，积累才能够饱满。";
+  } catch (error) {
+    console.error('获取一言失败:', error);
+    nextHitokoto.value = "智慧需要沉淀，积累才能够饱满。"; // 默认内容
+  }
+};
+
+// 在删除完成后更新显示内容
+const handleTypingComplete = () => {
+  // 如果有新内容，则更新显示
+  if (nextHitokoto.value) {
+    hitokoto.value = nextHitokoto.value;
+    nextHitokoto.value = null;
+  }
+  // 获取下一条内容
+  fetchHitokoto();
+};
 
 const hoursPassed = computed(() => now.value.getHours());
 const hoursProgress = computed(() =>
@@ -225,6 +261,9 @@ onMounted(() => {
   setInterval(() => {
     now.value = new Date();
   }, 1000);
+  
+  // 加载一言数据
+  fetchHitokoto();
 });
 </script>
 

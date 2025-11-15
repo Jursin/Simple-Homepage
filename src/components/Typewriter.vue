@@ -23,17 +23,20 @@ const props = defineProps({
   },
   delayAfterTyping: {
     type: Number,
-    default: 1000, // 打字完成后的延迟
+    default: 2000,
   },
   delayAfterDeleting: {
     type: Number,
-    default: 500, // 删除完成后的延迟
+    default: 150,
   },
   loop: {
     type: Boolean,
     default: true,
   },
 });
+
+// 定义打字完成事件
+const emit = defineEmits(['typingComplete']);
 
 const displayedText = ref("");
 const showCursor = ref(true);
@@ -58,6 +61,7 @@ const getTextArrayLength = () => {
 };
 
 const typeText = () => {
+  // 每次调用都重新获取最新的文本，确保使用最新的props值
   const textToType = getCurrentText();
 
   if (!isDeleting.value) {
@@ -66,12 +70,13 @@ const typeText = () => {
       currentIndex.value++;
       timeoutId = setTimeout(typeText, props.typingSpeed);
     } else {
-      if (props.loop || currentTextIndex.value < getTextArrayLength() - 1) {
-        timeoutId = setTimeout(() => {
-          isDeleting.value = true;
-          typeText();
-        }, props.delayAfterTyping);
-      }
+    // 打字完成，准备删除
+    if (props.loop || currentTextIndex.value < getTextArrayLength() - 1) {
+      timeoutId = setTimeout(() => {
+        isDeleting.value = true;
+        typeText();
+      }, props.delayAfterTyping);
+    }
     }
   } else {
     if (currentIndex.value > 0) {
@@ -80,7 +85,14 @@ const typeText = () => {
       timeoutId = setTimeout(typeText, props.deletingSpeed);
     } else {
       isDeleting.value = false;
+      
+      // 删除完成，触发事件加载新内容
+      emit('typingComplete');
+      
       if (props.loop || currentTextIndex.value < getTextArrayLength() - 1) {
+        // 重置索引，准备开始新的打字
+        currentIndex.value = 0;
+        
         if (Array.isArray(props.text) && props.text.length > 0) {
           currentTextIndex.value =
             (currentTextIndex.value + 1) % props.text.length;
@@ -115,6 +127,8 @@ onUnmounted(() => {
   overflow: hidden;
   text-align: center;
   font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .cursor {

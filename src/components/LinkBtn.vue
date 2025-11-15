@@ -5,7 +5,7 @@
     target="_blank"
     :style="{ background: color }"
   >
-    <Icon :icon="icon" width="36" height="36" />
+    <Icon :icon="icon" width="30" height="30" />
     <span>{{ text }}</span>
   </a>
 </template>
@@ -24,8 +24,8 @@ const props = defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  height: 40px;
+  font-size: 16px;
+  height: 30px;
   border-radius: 16px;
   padding: 0.5rem 0.7rem;
   margin: 0.5rem 0;

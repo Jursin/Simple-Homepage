@@ -28,13 +28,13 @@
       "icon": "mdi:minecraft",
       "text": "MC 指南",
       "color": "#4CAF50",
-      "url": "mc-guide.jursin.top"
+      "url": "https://mc-guide.jursin.top"
     },
     {
       "icon": "mingcute:navigation-fill",
       "text": "导航站",
       "color": "#0558CB",
-      "url": "nav.jursin.top"
+      "url": "https://nav.jursin.top"
     }
   ]
 }

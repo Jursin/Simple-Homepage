@@ -1,7 +1,7 @@
 {
   "name": "Jursin",
   "age": "07",
-  "zodiac": "巨蟹座",
+  "zodiac": "巨蟹座 ♋",
   "avatarUrl": "https://avatars.githubusercontent.com/u/127487914?v=4",
   "emjoi": "😋",
   "infoTags": {
@@ -9,5 +9,5 @@
     "school": "长江大学",
     "province": "湖北省"
   },
-  "professions": ["学生", "前端入门者"]
+  "professions": ["大学生", "前端入门者"]
 }

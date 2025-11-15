@@ -114,7 +114,7 @@
         <div class="card">
           <p>你好呀，很高兴认识你👋</p>
           <p>
-            我叫
+            我是
             <b>{{ config.name }}</b>
             （ {{ config.age }}年的 <b class="zodiac">{{ config.zodiac }}</b> ）
           </p>

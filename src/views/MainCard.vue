@@ -174,7 +174,7 @@
 
     <div class="footer">
       <p>
-        <a href="http://beian.miit.gov.cn/" target="_blank" >鄂ICP备2025157296号-1</a> | 版权所有 © 2025 Jursin
+        <img src="/miit.ico"><a href="http://beian.miit.gov.cn/" target="_blank" >鄂ICP备2025157296号-1</a> | 版权所有 © 2025 Jursin
       </p>
     </div>
   </div>

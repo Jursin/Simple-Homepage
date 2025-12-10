@@ -23,8 +23,8 @@
           <div v-else class="tag hover">
             {{ config.infoTags.sex }}
           </div>
-          <div class="tag hover">{{ config.infoTags.province }}</div>
-          <div class="tag hover">{{ config.infoTags.school }}</div>
+          <div class="tag hover"><Icon icon="mdi:location" width="16" height="16" /> {{ config.infoTags.province }}</div>
+          <div class="tag hover"><Icon icon="ep:school" width="16" height="16" /> {{ config.infoTags.school }}</div>
         </div>
       </div>
     </div>
@@ -48,52 +48,8 @@
         <!-- 时间显示 -->
         <div class="card" style="padding: 25px 16px;" >
           <div class="time-progress">
-            <h3><Icon icon="noto:hourglass-not-done" /> 时光</h3>
-            <div class="progress-item">
-              <p>☀️ 今天已经过去了 {{ hoursPassed }} / 24 小时</p>
-              <div class="progress-bar">
-                <div
-                  class="progress-fill"
-                  :style="{ width: hoursProgress + '%' }"
-                ></div>
-              </div>
-            </div>
-
-            <div class="progress-item">
-              <p>📆 本周已经过去了 {{ daysInWeekPassed }} / 7 天</p>
-              <div class="progress-bar">
-                <div
-                  class="progress-fill"
-                  :style="{ width: weekProgress + '%' }"
-                ></div>
-              </div>
-            </div>
-
-            <div class="progress-item">
-              <p>
-                🌙 本月已经过去了 {{ daysInMonthPassed }} /
-                {{ daysInCurrentMonth }} 天
-              </p>
-              <div class="progress-bar">
-                <div
-                  class="progress-fill"
-                  :style="{ width: monthProgress + '%' }"
-                ></div>
-              </div>
-            </div>
-
-            <div class="progress-item">
-              <p>
-                ⭐ 今年已经过去了 {{ daysInYearPassed }} /
-                {{ daysInCurrentYear }} 天
-              </p>
-              <div class="progress-bar">
-                <div
-                  class="progress-fill"
-                  :style="{ width: yearProgress + '%' }"
-                ></div>
-              </div>
-            </div>
+            <h3><Icon icon="noto:hourglass-not-done" /> Wakatime 周统计</h3>
+            <img src="https://github-readme-stats-indol-phi-94.vercel.app/api/wakatime?username=Jursin&card_width=400&hide_title=true&theme=transparent&locale=cn" alt="wakatime">
           </div>
         </div>
       </div>
@@ -104,9 +60,7 @@
           <p>
             我是
             <b>{{ config.name }}</b>
-            （ {{ config.age }}年的 <b class="zodiac">{{ config.zodiac }}</b> ）
-          </p>
-          <p>
+            （ {{ config.age }}年的 <b class="zodiac">{{ config.zodiac }}</b> ），
             是一名
             <span v-for="(i, index) in config.professions" :key="index">
               <b>{{ i }}</b>
@@ -115,47 +69,14 @@
           </p>
 
           <!-- 技术栈 -->
-          <h3>我的一些技术栈🫡</h3>
-          <div class="techStack">
-            <div
-              v-for="(i, index) in techStack.techStack"
-              :key="index"
-              class="techItem"
-              :data-name="i.name"
-            >
-              <template v-if="i.custom">
-                <!-- 自定义SVG图标 -->
-                <svg width="40" height="40" viewBox="0 0 24 24" :fill="i.fill || 'currentColor'">
-                  <path :d="i.svg" :fill="i.fill || 'currentColor'"/>
-                </svg>
-              </template>
-              <template v-else>
-                <!-- 普通图标 -->
-                <Icon :icon="i.icon" width="40" height="40" />
-              </template>
-            </div>
-          </div>
+          <h3>🫡使用的技术栈</h3>
+          <ItemGrid :items="techStack.techStack" />
           
-          <h3>我使用的编程工具🛠️</h3>
-          <div class="techStack">
-            <div
-              v-for="(i, index) in techStack.devTools"
-              :key="index"
-              class="techItem"
-              :data-name="i.name"
-            >
-              <template v-if="i.custom">
-                <!-- 自定义SVG图标 -->
-                <svg width="40" height="40" viewBox="0 0 24 24" :fill="i.fill || 'currentColor'">
-                  <path :d="i.svg" :fill="i.fill || 'currentColor'"/>
-                </svg>
-              </template>
-              <template v-else>
-                <!-- 普通图标 -->
-                <Icon :icon="i.icon" width="40" height="40" />
-              </template>
-            </div>
-          </div>
+          <h3>🛠️使用的编程工具</h3>
+          <ItemGrid :items="devTools.devTools" />
+
+          <h3>☁️使用的云服务平台</h3>
+          <ItemGrid :items="cloudPlatforms.cloudPlatforms" />
         </div>
 
         <!-- 外链按钮 -->
@@ -184,9 +105,12 @@
 import config from "../config/config.json";
 import linkBtns from "../config/linkBtn.json";
 import techStack from "../config/techStack.json";
+import devTools from "../config/devTools.json";
+import cloudPlatforms from "../config/cloudPlatforms.json";
 import { Icon } from "@iconify/vue";
 import LinkBtn from "../components/LinkBtn.vue";
-import { onMounted, ref, computed } from "vue";
+import ItemGrid from "../components/ItemGrid.vue";
+import { onMounted, ref } from "vue";
 import Typewriter from "../components/Typewriter.vue";
 
 const now = ref(new Date());
@@ -216,46 +140,6 @@ const handleTypingComplete = () => {
   // 获取下一条内容
   fetchHitokoto();
 };
-
-const hoursPassed = computed(() => now.value.getHours());
-const hoursProgress = computed(() =>
-  ((hoursPassed.value / 24) * 100).toFixed(2)
-);
-
-const daysInWeekPassed = computed(() => {
-  const day = now.value.getDay();
-  return day === 0 ? 7 : day;
-});
-const weekProgress = computed(() =>
-  ((daysInWeekPassed.value / 7) * 100).toFixed(2)
-);
-
-const daysInMonthPassed = computed(() => now.value.getDate());
-const daysInCurrentMonth = computed(() =>
-  new Date(now.value.getFullYear(), now.value.getMonth() + 1, 0).getDate()
-);
-const monthProgress = computed(
-  () => (daysInMonthPassed.value / daysInCurrentMonth.value) * 100
-);
-
-const daysInYearPassed = computed(() => {
-  const startOfYear = new Date(now.value.getFullYear(), 0, 1);
-  const diff = now.value - startOfYear;
-  return Math.ceil(diff / (1000 * 60 * 60 * 24));
-});
-
-const daysInCurrentYear = computed(() => {
-  const isLeap = isLeapYear(now.value.getFullYear());
-  return isLeap ? 366 : 365;
-});
-
-const yearProgress = computed(
-  () => (daysInYearPassed.value / daysInCurrentYear.value) * 100
-);
-
-function isLeapYear(year) {
-  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-}
 
 onMounted(() => {
   setInterval(() => {

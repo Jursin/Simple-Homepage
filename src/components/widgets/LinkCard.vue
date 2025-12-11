@@ -1,5 +1,5 @@
 <template>
-  <div class="linkBox card">
+  <div class="LinkCard card">
     <a
       v-for="(i, index) in linkBtns"
       :key="index"
@@ -26,7 +26,7 @@ defineProps({
 </script>
 
 <style scoped>
-.linkBox {
+.LinkCard {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -35,7 +35,7 @@ defineProps({
   padding: 0;
 }
 
-.linkBox :deep(a::before) {
+.LinkCard :deep(a::before) {
   display: none;
 }
 
@@ -69,7 +69,7 @@ defineProps({
 }
 
 @media (max-width: 768px) {
-  .linkBox {
+  .LinkCard {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: stretch;

@@ -64,7 +64,7 @@
         </div>
 
         <!-- 外链按钮 -->
-        <LinkBox :linkBtns="linkBtns.linkBtn" />
+        <LinkCard :linkBtns="linkBtns.linkBtn" />
       </div>
     </div>
 
@@ -83,7 +83,7 @@ import techStack from "../config/techStack.json";
 import devTools from "../config/devTools.json";
 import cloudPlatforms from "../config/cloudPlatforms.json";
 import { Icon } from "@iconify/vue";
-import LinkBox from "./widgets/LinkBox.vue";
+import LinkCard from "./widgets/LinkCard.vue";
 import ItemGrid from "./widgets/ItemGrid.vue";
 import HitokotoCard from "./widgets/HitokotoCard.vue";
 import WakatimeCard from "./widgets/WakatimeCard.vue";

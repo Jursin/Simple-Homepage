@@ -7,10 +7,6 @@
   </div>
 </template>
 
-<script setup>
-// 这个组件不需要任何 JavaScript 逻辑
-</script>
-
 <style scoped>
 .loadBox {
   width: 100%;

@@ -1,7 +1,4 @@
-* {
-  transition: all .3s ease-in-out;
-}
-
+/* 全局变量和主题定义 */
 :root {
   /* 背景颜色 */
   --background: #d0e8ff;
